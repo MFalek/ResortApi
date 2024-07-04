@@ -28,12 +28,12 @@ namespace ResortApi.Controllers
 
             return Ok(HotelID);
         }
-        [HttpPatch]
+        [HttpPut]
         public async Task<ActionResult<List<Reservation>>> Update(Reservation Reservations)
         {
             //popraw
 
-            var Editing = _context.Reservations.Find(Reservations.Id);
+            var Editing = await _context.Reservations.FindAsync(Reservations.Id);
             if (Editing == null)
             {
                 return BadRequest("Can't edit non-existent record");
@@ -45,9 +45,16 @@ namespace ResortApi.Controllers
             Editing.HotelName = Reservations.HotelName;
 
 
-            await _context.SaveChangesAsync();
-
-            return Ok(Editing);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data: " + ex.Message);
+            }
+            var ReservatiosnList = await _context.Hotels.ToListAsync();
+            return Ok(ReservatiosnList);
 
         }
         [HttpDelete]
@@ -70,12 +77,12 @@ namespace ResortApi.Controllers
             return Ok(message); 
 
         }
-        //ok
+        
         [HttpGet]
 
         public async Task<ActionResult<List<Reservation>>> Find()
         {
-            //popraw??
+        
             return Ok(await _context.Reservations.ToListAsync());
 
         }
