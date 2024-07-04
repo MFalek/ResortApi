@@ -27,7 +27,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API V1");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ResortApi v1");
     if (app.Environment.IsDevelopment())
         options.RoutePrefix = "swagger";
     else
