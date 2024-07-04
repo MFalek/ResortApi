@@ -70,7 +70,7 @@ namespace ResortApi.Controllers
             return Ok(message); 
 
         }
-
+        //ok
         [HttpGet]
 
         public async Task<ActionResult<List<Reservation>>> Find()
