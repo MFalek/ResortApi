@@ -10,4 +10,13 @@ namespace ResortApi.Models
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
     }
+
+
+    public class ReservationDto
+    {
+        public string? HotelName { get; set; }
+        public string? ClientName { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
+    }
 }

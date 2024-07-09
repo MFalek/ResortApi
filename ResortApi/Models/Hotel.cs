@@ -7,4 +7,12 @@
         public string? City { get; set; }
      
     }
+
+
+    public class HotelDto
+    {
+        public string? Name { get; set; }
+        public string? City { get; set; }
+    }
+
 }

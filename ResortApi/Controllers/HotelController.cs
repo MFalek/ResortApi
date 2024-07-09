@@ -17,16 +17,21 @@ namespace ResortApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Hotel>>> CreateEdit(Hotel Hotels)
+        public async Task<ActionResult<Hotel>> CreateEdit(HotelDto Hotels)
         {
+            var hotel = new Hotel
+            {
+                Name = Hotels.Name,
+                City = Hotels.City
+            };
 
-            _context.Hotels.Add(Hotels);
-            var HotelID = _context.Hotels.Find(Hotels.Id);
+            _context.Hotels.Add(hotel);
+            await _context.SaveChangesAsync();
 
-            _context.SaveChanges();
-
-            return Ok(HotelID);
+            return Ok(hotel);
         }
+
+
         [HttpPut]
         public async Task<ActionResult<List<Hotel>>> Update(Hotel Hotels)
         {

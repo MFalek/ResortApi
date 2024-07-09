@@ -1,5 +1,8 @@
 global using ResortApi.Data;
 global using Microsoft.EntityFrameworkCore;
+global using System.Collections.Generic;
+global using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Builder;
 
 

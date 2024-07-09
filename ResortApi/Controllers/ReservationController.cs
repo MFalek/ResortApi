@@ -18,16 +18,23 @@ namespace ResortApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Reservation>>> CreateEdit(Reservation Reservations)
+        public async Task<ActionResult<Reservation>> CreateEdit(ReservationDto Reservations)
         {
+            var reservation = new Reservation
+            {
+                HotelName = Reservations.HotelName,
+                ClientName = Reservations.ClientName,
+                CheckInDate = Reservations.CheckInDate,
+                CheckOutDate = Reservations.CheckOutDate,
+            };
 
-            _context.Reservations.Add(Reservations);
-            var HotelID = _context.Reservations.Find(Reservations.Id);
+            _context.Reservations.Add(reservation);
+            await _context.SaveChangesAsync();
 
-            _context.SaveChanges();
-
-            return Ok(HotelID);
+            return Ok(reservation);
         }
+
+
         [HttpPut]
         public async Task<ActionResult<List<Reservation>>> Update(Reservation Reservations)
         {
