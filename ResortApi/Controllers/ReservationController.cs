@@ -60,7 +60,7 @@ namespace ResortApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data: " + ex.Message);
             }
-            var ReservatiosnList = await _context.Hotels.ToListAsync();
+            var ReservatiosnList = await _context.Reservations.ToListAsync();
             return Ok(ReservatiosnList);
 
         }
